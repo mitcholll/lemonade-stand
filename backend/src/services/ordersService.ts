@@ -1,13 +1,14 @@
 import { openDb } from '../db';
 import sqlite3 from 'sqlite3';
 import { Database } from 'sqlite';
-import { Order } from '../models/order';
-import { OrdersTableSchema } from '../models/order';
+import { Order, OrdersTableSchema } from '../models/order';
+import { calculateOrderItemSubtotal, OrderItemsTableSchema } from '../models/orderItem';
 
 // Create orders tables
 export async function createOrdersTable() {
   const db: Database<sqlite3.Database, sqlite3.Statement> = await openDb();
   await db.exec(OrdersTableSchema);
+  await db.exec(OrderItemsTableSchema);
   await db.close();
 }
 
@@ -20,7 +21,7 @@ export async function createOrder(order: Order) {
 
   // Calculate total server-side
   const total = order.items.reduce(
-    (sum, item) => sum + item.beverage.price * item.quantity,
+    (sum, item) => sum + calculateOrderItemSubtotal(item),
     0
   );
 
@@ -59,7 +60,7 @@ export async function createOrder(order: Order) {
   };
 }
 
-/////////////////////////////// Optional: fetch all orders
+// NOTE: For testing and debugging purposes: fetch all orders
 export async function getAllOrders() {
   const db: Database<sqlite3.Database, sqlite3.Statement> = await openDb();
 

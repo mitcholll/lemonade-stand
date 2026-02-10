@@ -1,5 +1,5 @@
 import { Router, Request, Response } from 'express';
-import { createOrder } from '../services/ordersService';
+import { createOrder, getAllOrders } from '../services/ordersService';
 
 const router = Router();
 
@@ -12,6 +12,19 @@ router.post('/', async (req: Request, res: Response) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Failed to create order' });
+  }
+});
+
+// GET /orders
+// NOTE: For testing and debugging purposes
+//       Used to verify orders are being saved correctly in the database
+router.get('/', async (req: Request, res: Response) => {
+  try {
+    const orders = await getAllOrders();
+    res.json(orders);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to fetch orders' });
   }
 });
 

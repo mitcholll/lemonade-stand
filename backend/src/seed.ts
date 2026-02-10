@@ -1,5 +1,5 @@
 import { createBeveragesTable, seedBeverages } from './services/beveragesService';
-import { createOrdersTable } from './services/ordersService';
+// import { createOrdersTable } from './services/ordersService';
 import { Beverage } from './models/beverage';
 
 const beverages: Beverage[] = [

@@ -8,6 +8,7 @@ const app: Application = express();
 // Middleware to parse JSON bodies
 app.use(express.json());
 
+// Route registration
 app.use('/beverages', beveragesRouter);
 app.use('/orders', ordersRouter);
 
