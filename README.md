@@ -29,12 +29,12 @@ A digital lemonade stand application
 
 6. Expected response:
 
-\`\`\`json
+```json
 {
   "status": "OK",
   "message": "Backend is running!"
 }
-
+```
 
 ## Notes / Assumptions
 
