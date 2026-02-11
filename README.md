@@ -63,3 +63,107 @@ A digital lemonade stand application
 2. Beverages are seeded only via npm run seed.
 
 3. No authentication is required.
+
+4. Check Beverages
+  - To verify that beverages are added to the database, open your browser and visit:
+  `http://localhost:3001/beverages`
+
+  - Expected response:
+
+```json
+[
+  {
+    "id": 1,
+    "name": "Classic Lemonade",
+    "price": 3.5
+  },
+  {
+    "id": 2,
+    "name": "Strawberry Fizz",
+    "price": 4
+  },
+  {
+    "id": 3,
+    "name": "Iced Tea",
+    "price": 3
+  }
+]
+```
+
+5. Check Orders
+  - To verify that orders are correctly stored and propogated in the database, open your browser and visit:
+    `http://localhost:3001/orders`
+
+  - Expected response:
+
+```json
+[
+  {
+    "orderId": 1,
+    "customerName": "Mitchell",
+    "customerEmail": "mitchell.weingust@gmail.com",
+    "total": 20.5,
+    "items": [
+      {
+        "beverage": {
+          "id": 1,
+          "name": "Classic Lemonade",
+          "price": 3.5
+        },
+        "quantity": 1
+      },
+      {
+        "beverage": {
+          "id": 2,
+          "name": "Strawberry Fizz",
+          "price": 4
+        },
+        "quantity": 2
+      },
+      {
+        "beverage": {
+          "id": 3,
+          "name": "Iced Tea",
+          "price": 3
+        },
+        "quantity": 3
+      }
+    ]
+  },
+  {
+    "orderId": 2,
+    "customerName": "Michael",
+    "customerEmail": "Michael.realperson@gmail.org",
+    "total": 104.5,
+    "items": [
+      {
+        "beverage": {
+          "id": 1,
+          "name": "Classic Lemonade",
+          "price": 3.5
+        },
+        "quantity": 1
+      },
+      {
+        "beverage": {
+          "id": 2,
+          "name": "Strawberry Fizz",
+          "price": 4
+        },
+        "quantity": 11
+      },
+      {
+        "beverage": {
+          "id": 3,
+          "name": "Iced Tea",
+          "price": 3
+        },
+        "quantity": 19
+      }
+    ]
+  }
+]
+```
+  - This additional endpoint was used to implement additional functionality for testing and debugging orders via getAllOrders in the backend.
+
+  6. The total for an order is calculated in the frontend, per the project instructions. This ensures that the correct total is displayed to the user before submitting their order. When an order is submitted, the customer’s name, email, selected beverages and their quantities, and the total order price are sent to the backend. For better maintainability and consistency in a real-world application, the backend could calculate the total dynamically instead of storing it. This approach avoids redundancy and aligns with database normalization principles.

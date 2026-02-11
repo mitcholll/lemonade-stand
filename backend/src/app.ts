@@ -9,6 +9,8 @@ const FRONTEND_URL = 'http://localhost:3000';
 
 // Middleware to parse JSON bodies
 app.use(express.json());
+
+// Enable CORS for the frontend
 app.use(cors({ origin: FRONTEND_URL }));
 
 // Route registration

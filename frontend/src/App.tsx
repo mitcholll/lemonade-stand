@@ -8,22 +8,30 @@ import { Order } from './models/order';
 import { OrderItem } from './models/orderItem';
 
 function App() {
+  // State for beverages fetched from backend
   const [beverages, setBeverages] = useState<Beverage[]>([]);
+
+  // State to track quantities selected for each beverage
   const [quantities, setQuantities] = useState<{ [id: number]: number }>({});
+
+  // State for customer information
   const [customerName, setCustomerName] = useState('');
   const [customerEmail, setCustomerEmail] = useState('');
+
+  // State to show confirmation messages after order submission
   const [confirmation, setConfirmation] = useState('');
 
+   /**
+   * Handles submitting an order to the backend
+   * Resets form fields and sets a confirmation message on success
+   * @param items - Array of OrderItem objects representing selected beverages and quantities
+   * @param total - Total order price calculated in the frontend
+   */
   const handleSubmitOrder = async (items: OrderItem[], total: number) => {
     const order: Order = { customerName, customerEmail, items, total };
 
     try {
-      const savedOrder = await submitOrder(order);
-
-      // Build list of items for the receipt
-      const orderedItems = order.items
-        .map(item => `${item.quantity}x $${item.beverage.price.toFixed(2)} ${item.beverage.name}`)
-        .join('\n');
+      await submitOrder(order);
 
       // Set confirmation success message
       setConfirmation(`Success! Thanks ${order.customerName}, your order has been submitted.`);

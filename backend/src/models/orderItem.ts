@@ -1,10 +1,18 @@
 import { Beverage } from './beverage';
 
+/**
+ * OrderItem interface
+ * Represents a single beverage and its quantity within an order
+ */
 export interface OrderItem {
   beverage: Beverage;
   quantity: number;
 }
 
+/**
+ * SQLite table schema for order items
+ * Creates table if it doesn't exist
+ */
 export const OrderItemsTableSchema = `
 CREATE TABLE IF NOT EXISTS order_items (
   id INTEGER PRIMARY KEY,

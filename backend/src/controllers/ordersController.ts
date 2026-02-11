@@ -2,7 +2,11 @@ import { Request, Response } from 'express';
 import { createOrder, getAllOrders } from '../services/ordersService';
 import { Order } from '../models/order';
 
-// Create a new order
+/**
+ * POST /orders
+ * Receives an order from the frontend, saves it in the database,
+ * and returns a confirmation along with the saved order.
+ */
 export async function postOrder(req: Request, res: Response) {
   try {
     const order: Order = req.body; // Expect { customerName, customerEmail, items: [{ beverage: { id }, quantity }] }
@@ -14,8 +18,12 @@ export async function postOrder(req: Request, res: Response) {
   }
 };
 
-// NOTE: For testing and debugging purposes
-//       Used to verify orders are being saved correctly in the database
+/**
+ * GET /orders
+ * Additional Functionality
+ * For testing/debugging: fetches all orders along with their items.
+ * Used to verify orders are being saved correctly in the database
+ */
 export async function getOrders(req: Request, res: Response) {
   try {
     const orders = await getAllOrders();
