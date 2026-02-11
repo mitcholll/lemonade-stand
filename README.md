@@ -3,9 +3,16 @@ A digital lemonade stand application
 
 # Technology Stack
 - Node.js with Express
+Used to build a simple REST API for retrieving beverages and submitting orders.
+
 - React
+Used to render the user interface, manage form state, and submit orders to the backend.
+
 - TypeScript
+Used to add type safety and make the code easier to understand and maintain.
+
 - SQLite
+Used as a lightweight database to store beverages and orders.
 
 ## Prerequisites
 - Node.js LTS (v18+ recommended) [Developed using v24.13.0]
@@ -35,6 +42,19 @@ A digital lemonade stand application
   "message": "Backend is running!"
 }
 ```
+
+## Frontend Setup
+1. Open a new terminal, and, navigate to the 'frontend' folder:
+`cd frontend`
+
+2. Install dependencies:
+`npm install`
+
+3. Start the React development server:
+`npm start`
+
+4. Open the application in your browser:
+`http://localhost:3000`
 
 ## Notes / Assumptions
 

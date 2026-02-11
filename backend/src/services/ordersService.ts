@@ -2,7 +2,7 @@ import { openDb } from '../db';
 import sqlite3 from 'sqlite3';
 import { Database } from 'sqlite';
 import { Order, OrdersTableSchema } from '../models/order';
-import { calculateOrderItemSubtotal, OrderItemsTableSchema } from '../models/orderItem';
+import { OrderItemsTableSchema } from '../models/orderItem';
 
 // Create orders tables
 export async function createOrdersTable() {
@@ -19,19 +19,13 @@ export async function createOrder(order: Order) {
   // Start transaction
   await db.exec('BEGIN TRANSACTION');
 
-  // Calculate total server-side
-  const total = order.items.reduce(
-    (sum, item) => sum + calculateOrderItemSubtotal(item),
-    0
-  );
-
   // Insert order
   const result = await db.run(
     `INSERT INTO orders (customer_name, customer_email, total)
      VALUES (?, ?, ?)`,
     order.customerName,
     order.customerEmail,
-    total
+    order.total
   );
 
   const orderId = result.lastID; // SQLite gives the inserted row ID
@@ -56,7 +50,7 @@ export async function createOrder(order: Order) {
     customerName: order.customerName,
     customerEmail: order.customerEmail,
     items: order.items,
-    total
+    total: order.total
   };
 }
 

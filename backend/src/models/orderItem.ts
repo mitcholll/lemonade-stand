@@ -5,10 +5,6 @@ export interface OrderItem {
   quantity: number;
 }
 
-export function calculateOrderItemSubtotal(item: OrderItem): number {
-  return item.beverage.price * item.quantity;
-}
-
 export const OrderItemsTableSchema = `
 CREATE TABLE IF NOT EXISTS order_items (
   id INTEGER PRIMARY KEY,
